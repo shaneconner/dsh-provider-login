@@ -21,8 +21,22 @@ import type {
   AuthorizationEntry, AuthorizationNotice, AuthorizationPrompt,
 } from '@deepseek-ai/dsh-authorization'
 import type { CommandInvocation, CommandResult } from '@deepseek-ai/dsh-commands'
-import { credentialKeyId } from '@deepseek-ai/dsh-credentials'
 import type { CredentialKey } from '@deepseek-ai/dsh-credentials'
+
+/*
+ * Inlined rather than imported from `@deepseek-ai/dsh-credentials`.
+ *
+ * Every service this plugin uses is provided by the harness at runtime, so the
+ * harness packages are peers, not dependencies. But a peer range makes pnpm
+ * resolve the package, and resolving any of them cascades through the harness's
+ * internal graph into `@deepseek-ai/dsh-type-meta`, which is not published: the
+ * install fails outright with a 404 before the plugin is ever loaded.
+ *
+ * One real import was the whole cost of that. It is a slice on a branded
+ * `scope/id` string, so it lives here and the harness packages stay type-only.
+ */
+const credentialKeyId = (key: CredentialKey): string =>
+  String(key).slice(String(key).indexOf('/') + 1)
 
 export const name = 'login'
 export const inject = ['authorization', 'commands', 'credentials']

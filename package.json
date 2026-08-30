@@ -1,6 +1,6 @@
 {
   "name": "dsh-provider-login",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sign in to DeepSeek Harness model providers with a subscription: drives the OAuth flows the harness registers but never exposes.",
   "keywords": [
     "dsh-plugin",
@@ -56,5 +56,16 @@
     "url": "git+https://github.com/shaneconner/dsh-provider-login.git"
   },
   "bugs": "https://github.com/shaneconner/dsh-provider-login/issues",
-  "homepage": "https://github.com/shaneconner/dsh-provider-login#readme"
+  "homepage": "https://github.com/shaneconner/dsh-provider-login#readme",
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-authorization": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-commands": {
+      "optional": true
+    },
+    "@deepseek-ai/dsh-credentials": {
+      "optional": true
+    }
+  }
 }
