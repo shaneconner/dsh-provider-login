@@ -1,0 +1,54 @@
+{
+  "name": "dsh-provider-login",
+  "version": "0.1.0",
+  "description": "Sign in to DeepSeek Harness model providers with a subscription: drives the OAuth flows the harness registers but never exposes.",
+  "keywords": [
+    "dsh-plugin",
+    "dsh",
+    "oauth",
+    "login",
+    "credentials"
+  ],
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "author": "Shane Conner",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-authorization": "*",
+    "@deepseek-ai/dsh-commands": "*",
+    "@deepseek-ai/dsh-credentials": "*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noCheck",
+    "check": "tsc -p tsconfig.json --noEmit 2>&1 | grep \"^src/\" && exit 1 || exit 0",
+    "prepack": "npm run check && npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

@@ -1,0 +1,10 @@
+# The authorization registry is what makes the harness's own OAuth flows
+# reachable. It ships with dsh and is published, but no bundle mounts it, so
+# every flow llm-pi-ai registers sits behind a service that is never provided.
+# Mounting it here is what turns 37 dead registrations into working logins.
+- insert:
+    - id: authorization
+      name: '@deepseek-ai/dsh-authorization'
+    - id: login
+      name: 'dsh-provider-login'
+      inject: [authorization, commands, credentials]
